@@ -1,13 +1,13 @@
 from setuptools import setup
 setup(
     name='gImageGrabber',
-    version='0.1.9',
+    version='0.1.10',
     author='Saksham Sharma',
     author_email='codeck313@gmail.com',
     packages=['imggrabber', 'imggrabber.test'],
     scripts=['bin/simpleScript.py'],
     url='https://pypi.org/project/gImageGrabber',
-    project_url={
+    project_urls={
         'gImageGrabber Source': 'https://github.com/codeck313/gImageGrabber',
     },
     data_files=[
