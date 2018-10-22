@@ -17,7 +17,7 @@
 from setuptools import setup
 setup(
     name='gImageGrabber',
-    version='0.1.10',
+    version='0.1.10b',
     author='Saksham Sharma',
     author_email='codeck313@gmail.com',
     packages=['imggrabber', 'imggrabber.test'],
