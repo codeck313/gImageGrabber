@@ -1,14 +1,14 @@
 from setuptools import setup
 setup(
     name='gImageGrabber',
-    version='0.1.7',
+    version='0.1.8',
     author='Saksham Sharma',
     author_email='codeck313@gmail.com',
     packages=['imggrabber', 'imggrabber.test'],
     scripts=['bin/simpleScript.py'],
     url='https://pypi.org/project/gImageGrabber',
     project_url={
-        'Test Site': 'https://mysnappy.weebly.com/',
+        'gImageGrabber Source': 'https://github.com/codeck313/gImageGrabber',
     },
     data_files=[
         ('driver', ['driver/chromedriver.exe', 'driver/geckodriver.exe']),
