@@ -12,3 +12,4 @@ v0.1.5, 22-10-2018 -- Tweaks in simpleScript.py
 v0.1.6, 22-10-2018 -- Tweaks in imgScrape.py
 v0.1.7, 23-10-2018 -- Added Example Code snippet
 v0.1.8, 23-10-2018 -- Added GitHub Rep link
+v0.1.9, 23-10-2018 -- Fixed Bugs
