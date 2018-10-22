@@ -1,0 +1,185 @@
+Google Image Grabber
+====================
+
+It provides tools to grab images from a google search by extracting the
+links of the images and downloading full resolution images.
+
+This program written in Python is tested on windows 10 64-bit processor.
+It uses Selenium to open a browser so as to scroll down to get more
+images than possible otherwise. Thus it needs a browser to work
+correctly. This is on default set to use chrome browser but if its not
+found it will use Firefox. The package comes with chromedriver and
+geckodriver with it.
+
+Installation
+------------
+
+To install gImageGrabber do as follow:
+
+``` {.sourceCode .console}
+$ pip install gImageGrabber
+```
+
+There are two python files *imgScrape* and *imgTools*.
+
+*imgScrape* has all the utilities needed to run the script but if you
+want to have additional control functions you could explore *imgTools*.
+
+Importing
+---------
+
+This how you can import this module to your script.
+
+``` {.sourceCode .python}
+from gimagegrabber import imgScrape
+from gimagegrabber import imgTools
+```
+
+Functions
+---------
+
+### Building URL
+
+imgScrape.build\_url(search)
+
+This is to compose a google search URL for your search term. It takes a
+search argument which specifies your search term of which you need
+pictures of.
+
+**Usage** :
+
+``` {.sourceCode .python}
+from gimagegrabber import imgScrape
+
+searchTerm = "kamikaze eminem"
+
+url = imgScrape.build_url(searchTerm)
+print(url) #FOR DEBUG PURPOSE
+```
+
+### Getting Source Data
+
+imgScrape.browser(url, test=False)
+
+This to start a browser windows and scroll down the webpage to let more
+pictures load.It returns a raw source code encoded *utf-8*. It takes 2
+arguments url and test .
+
+1.  url is the url of the page it needs to open.
+2.  test is to make the browser scroll down less thus taking less time
+    to return the source code. This is useful when you are writing or
+    debugging.
+
+It uses Chrome or Firefox to work so make sure you have Google chrome or
+Firefox installed at their default directory.
+
+Sometimes you might need to click on **show more images** on webpage to
+load even more images
+
+If you cant seem to open browser make sure you are on 64-bit OS and that
+you have chrome or Firefox installed.
+
+If you are on 32-bit processor you need to use Firefox and you also have
+to download 32 bit driver from
+[here](https://github.com/mozilla/geckodriver/releases) and replace it
+with the already present **geckodriver.exe** saved in **driver folder**
+of the gImageGrabber Module folder.
+
+**Usage** :
+
+``` {.sourceCode .python}
+from gimagegrabber import imgScrape
+
+searchTerm = "Kamikaze"
+
+url = imgScrape.build_url(searchTerm)
+raw_data = imgScrape.browser(url)
+print(raw_data) #FOR DEBUG PURPOSE
+```
+
+### Extracting Links
+
+imgScrape.imageLink(html)
+
+This extracts the original link of the images from the html provided.
+html is the source code of the google image search page. It returns a
+dict with format **[ link : file extension ]** . If you want it in
+**[file extension : link]** you can use **invDict()** function from
+imgTools
+
+**Usage** :
+
+``` {.sourceCode .python}
+from gimagegrabber import imgScrape
+from gimagegrabber import imgTools
+
+searchTerm = "Kamikaze"
+debug = False
+
+url = imgScrape.build_url(searchTerm)
+raw_data = imgScrape.browser(url,debug)
+links = imgScrape.imageLink(raw_data)
+print(links) #FOR DEBUG PURPOSE
+print(imgTools,invDict(links)) #FOR DEBUG PURPOSE
+```
+
+### Saving Images
+
+imgScrape.saveImages(data, name, onlyType)\`
+
+This saves all the images given to it in a list of format *[link: file
+extension]*.
+
+It has 3 arguments:
+
+1.  data This is to provide dictionary containing links to images.
+2.  name This is to provide the name for the folder under which images
+    will be saved.
+3.  onlyType If you want only a particular file extension then use this
+    mention that. If don't want to specify anything pass it a empty
+    string or just don't use that argument.
+
+The format in which it saves images is Search term
+
+    Root folder
+    |-- Search Term
+        |-- file extension(eg 'jpg')
+            |-- 000001.jpg
+            |-- 000002.jpg
+
+**Usage** :
+
+``` {.sourceCode .python}
+from gimagegrabber import imgScrape
+
+searchTerm = "Kamikaze"
+extension = '' #save all types of images
+
+url = imgScrape.build_url(searchTerm)
+raw_data = imgScrape.browser(url)
+links = imgScrape.imageLink(raw_data)
+imgScrape.saveImages(links,searchTerm,extension)
+```
+
+Example Code
+------------
+
+This code is included in the package as simpleScript.py.
+
+``` {.sourceCode .python}
+from imggrabber import imgScrape
+
+# Search term
+search = 'Python Language'
+fType = ''  # if you want all the files them make it empty string
+debug = False
+
+html = imgScrape.browser(imgScrape.build_url(search), debug)
+data = imgScrape.imageLink(html)
+imgScrape.saveImages(data, search, fType)
+```
+
+Author
+------
+
+Saksham Sharma

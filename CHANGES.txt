@@ -1,0 +1,13 @@
+v0.0.1, 21-10-2018 -- Initial release.
+v0.0.2, 22-10-2018 -- More Documentation
+v0.0.3, 22-10-2018 -- Documentation Format Improved
+v0.0.4, 22-10-2018 -- Changes in Documentation
+v0.0.5, 22-10-2018 -- Changes in Documentation
+v0.0.6, 22-10-2018 -- Added functionality to catch exception and changes in setup.py file
+v0.0.7, 22-10-2018 -- Changes in setup.py
+v0.0.7, 22-10-2018 -- Changes in README and Module Structure
+v0.1.0, 22-10-2018 -- README file format improved and Changes in the imgScrape.py
+v0.1.4, 22-10-2018 -- Driver issues sorted
+v0.1.5, 22-10-2018 -- Tweaks in simpleScript.py
+v0.1.6, 22-10-2018 -- Tweaks in imgScrape.py
+v0.1.7, 22-10-2018 -- Added Example Code snippet
