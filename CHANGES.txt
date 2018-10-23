@@ -15,3 +15,4 @@ v0.1.8, 23-10-2018 -- Added GitHub Rep link
 v0.1.9, 23-10-2018 -- Fixed Bugs
 v0.1.10, 23-10-2018 -- Fixed Bugs
 v0.1.11, 23-10-2018 -- License Update
+v0.1.12, 23-10-2018 -- Changes in README

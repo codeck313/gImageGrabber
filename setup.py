@@ -17,7 +17,7 @@
 from setuptools import setup
 setup(
     name='gImageGrabber',
-    version='0.1.11',
+    version='0.1.12',
     author='Saksham Sharma',
     author_email='codeck313@gmail.com',
     packages=['imggrabber', 'imggrabber.test'],
@@ -30,9 +30,9 @@ setup(
         ('driver', ['driver/chromedriver.exe', 'driver/geckodriver.exe']),
     ],
     license='GNU General Public License version 3',
-    description='Tool download orignal resolution images from Google search',
+    description='Tools to download images from Google search',
     long_description=open('README.rst').read(),
-    keywords="google images extractor parser webpage gImageGrabber grabber extract",
+    keywords="google images extractor parser webpage gImageGrabber grabber extract search image python",
     install_requires=[
         "urllib3 == 1.23",
         "beautifulsoup4==4.6.3",

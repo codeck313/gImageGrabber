@@ -2,13 +2,13 @@ Google Image Grabber
 ====================
 
 It provides tools to grab images from a google search by extracting the
-links of the images and downloading full resolution images.
+links of the images and downloading original images.
 
-This program written in Python is tested on windows 10 64-bit processor.
-It uses Selenium to open a browser so as to scroll down to get more
-images than possible otherwise. Thus it needs a browser to work
-correctly. This is on default set to use chrome browser but if its not
-found it will use Firefox. The package comes with chromedriver and
+This module is written for windows 10 on 64-bit processor. It uses
+Selenium to open browser so as to scroll down to get more images than
+possible otherwise. Thus it **needs a browser** to work correctly. This
+is on *default* set to use *chrome browser* in case of inability to open
+it Firefox will be used. The package comes with chromedriver and
 geckodriver with it.
 
 Installation
@@ -23,12 +23,13 @@ $ pip install gImageGrabber
 There are two python files *imgScrape* and *imgTools*.
 
 *imgScrape* has all the utilities needed to run the script but if you
-want to have additional control functions you could explore *imgTools*.
+want to have additional control over the functions you could explore
+*imgTools*.
 
 Importing
 ---------
 
-This how you can import this module to your script.
+To import this module to your script do this :
 
 ``` {.sourceCode .python}
 from gimagegrabber import imgScrape
@@ -42,9 +43,8 @@ Functions
 
 imgScrape.build\_url(search)
 
-This is to compose a google search URL for your search term. It takes a
-search argument which specifies your search term of which you need
-pictures of.
+This is to compose a google search URL for your search term. To specify
+your search term use search argument of the function to build the URL.
 
 **Usage** :
 
@@ -62,13 +62,13 @@ print(url) #FOR DEBUG PURPOSE
 imgScrape.browser(url, test=False)
 
 This to start a browser windows and scroll down the webpage to let more
-pictures load.It returns a raw source code encoded *utf-8*. It takes 2
-arguments url and test .
+pictures load.It returns a raw source code data of the webpage encoded
+in *utf-8* format. It takes 2 arguments url and test .
 
 1.  url is the url of the page it needs to open.
 2.  test is to make the browser scroll down less thus taking less time
     to return the source code. This is useful when you are writing or
-    debugging.
+    debugging something in your script.
 
 It uses Chrome or Firefox to work so make sure you have Google chrome or
 Firefox installed at their default directory.
@@ -90,7 +90,7 @@ of the gImageGrabber Module folder.
 ``` {.sourceCode .python}
 from gimagegrabber import imgScrape
 
-searchTerm = "Kamikaze"
+searchTerm = "kamikaze eminem"
 
 url = imgScrape.build_url(searchTerm)
 raw_data = imgScrape.browser(url)
@@ -101,11 +101,11 @@ print(raw_data) #FOR DEBUG PURPOSE
 
 imgScrape.imageLink(html)
 
-This extracts the original link of the images from the html provided.
-html is the source code of the google image search page. It returns a
-dict with format **[ link : file extension ]** . If you want it in
-**[file extension : link]** you can use **invDict()** function from
-imgTools
+This extracts the original link of the images from the html(source code)
+provided. html is the source code of the google image search page. It
+returns a dict with format **[ link : file extension ]** . If you want
+it in **[file extension : link]** you can use imgTools.invDict()\`
+function from imgTools
 
 **Usage** :
 
@@ -113,7 +113,7 @@ imgTools
 from gimagegrabber import imgScrape
 from gimagegrabber import imgTools
 
-searchTerm = "Kamikaze"
+searchTerm = "kamikaze eminem"
 debug = False
 
 url = imgScrape.build_url(searchTerm)
@@ -127,19 +127,20 @@ print(imgTools,invDict(links)) #FOR DEBUG PURPOSE
 
 imgScrape.saveImages(data, name, onlyType)\`
 
-This saves all the images given to it in a list of format *[link: file
-extension]*.
+This saves all the images given to it in a list of format **[link: file
+extension]**.
 
-It has 3 arguments:
+It takes 3 arguments:
 
-1.  data This is to provide dictionary containing links to images.
+1.  data This is to provide dictionary containing links to images in
+    format **[link: file extension]**.
 2.  name This is to provide the name for the folder under which images
     will be saved.
 3.  onlyType If you want only a particular file extension then use this
-    mention that. If don't want to specify anything pass it a empty
-    string or just don't use that argument.
+    mention that. If not, then pass it a empty string or just don't use
+    that argument.
 
-The format in which it saves images is Search term
+The format in which it saves images is
 
     Root folder
     |-- Search Term
@@ -170,7 +171,7 @@ This code is included in the package as simpleScript.py.
 from imggrabber import imgScrape
 
 # Search term
-search = 'Python Language'
+search = 'kamikaze eminem'
 fType = ''  # if you want all the files them make it empty string
 debug = False
 
