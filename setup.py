@@ -17,10 +17,10 @@
 from setuptools import setup
 setup(
     name='gImageGrabber',
-    version='0.1.12',
+    version='0.1.16.1',
     author='Saksham Sharma',
     author_email='codeck313@gmail.com',
-    packages=['imggrabber', 'imggrabber.test'],
+    packages=['imggrabber'],
     scripts=['bin/simpleScript.py'],
     url='https://pypi.org/project/gImageGrabber',
     project_urls={

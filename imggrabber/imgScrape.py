@@ -24,14 +24,16 @@ from selenium.webdriver.common.keys import Keys
 import time
 import sys
 import re
+import platform
 
 
 def build_url(search):
     # google image url
-    url1 = "https://www.google.co.in/search?hl=en&authuser=0&biw=1535&bih=722&tbm=isch&sa=1&ei=iE3LW4fUOcG5rQG3gpToBQ&q={}"
-    url2 = "&oq={}&gs_l=img.3...0.0.0.5088.0.0.0.0.0.0.0.0..0.0....0...1c..64.img..0.0.0....0.6Qi_lxy3rmM"
+    url1 = "https://www.google.com/search?q={}"
+    url2 = "&client=ubuntu&hs=rss&channel=fs&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiwg5njq_fiAhVBqo8KHWAGD1kQ_AUIECgB&biw=880&bih=864"
     urlJoin = url1+url2
-    url = urlJoin.format(imgTools.searchTermUrl(search), imgTools.searchTermUrl(search))
+    url = urlJoin.format(imgTools.searchTermUrl(
+        search))
     print("Using URL : ", url)
     return url
 
@@ -39,26 +41,49 @@ def build_url(search):
 def browser(url, test=False):  # Using Browser to get the extended source code
     print("Loading the Web-Browser")
     pathDIR = os.path.abspath(__file__)
-    pathFinder = re.compile(r'[\w\d:\\]+(?=lib)')
+
+    if platform.system() == 'Windows':
+        print("Working on Windows")
+        pathFinder = re.compile(r'[\w\d:\\]+(?=lib)')
+    elif platform.system() == 'Linux':
+        print("Working on Linux")
+        pathFinder = re.compile(r'[\w\d:\/]+(?=lib)')
+
     pathList = pathFinder.findall(pathDIR)
     path = pathList[0]
-    print(path)
 
     try:
-
+        pathchrome = ""
         print("Trying to load Chrome")
-        driver = webdriver.Chrome(executable_path=path+"driver\\chromedriver.exe")
+        if platform.system() == 'Windows':
+            pathchrome = path+"driver\chromedriver.exe"
+        elif platform.system() == 'Linux':
+            pathchrome = path+"driver/chromedriver"
+        driver = webdriver.Chrome(
+            executable_path=pathchrome)
         print("Chrome Browser opened")
-    except Exception :
+
+    except Exception:
         print("****Cant Open Chrome****")
+
         try:
+            pathfirefox = ""
             print("Trying to load Firefox now")
-            driver = webdriver.Firefox(executable_path=path+"driver\\geckodriver.exe")
+
+            if platform.system() == 'Windows':
+                pathfirefox = path+"driver\geckodriver.exe"
+            elif platform.system() == 'Linux':
+                pathfirefox = path+"driver/geckodriver"
+
+            driver = webdriver.Firefox(
+                executable_path=pathfirefox)
             print("Firefox Browser opened")
-        except Exception :
+
+        except Exception:
             print("****Cant Open Firefox****")
             print("****Exiting Now****")
             sys.exit()
+
     print("Opening the URL")
     driver.get(url)
     element = driver.find_element_by_tag_name("body")
@@ -99,7 +124,7 @@ def imageLink(html):  # get images from url
     return data
 
 
-def saveImages(data, name, onlyType=''):
+def saveImages(data, name, onlyType='', startingnos=0, prefix=""):
     if onlyType is '':
         onlyType = ' '
     data = imgTools.invDict(data)
@@ -109,7 +134,7 @@ def saveImages(data, name, onlyType=''):
         os.mkdir(directory)
 
     print("Saving pictures now")
-    if onlyType == ' ' :
+    if onlyType == ' ':
         print("Saving all Types")
         for type in data.keys():
             for i, link in enumerate(data[type]):
@@ -117,8 +142,9 @@ def saveImages(data, name, onlyType=''):
                     typeDirec = 'Forced jpg'
                     if not os.path.isdir(directory+"/"+typeDirec):
                         os.mkdir(directory+"/"+typeDirec)
-                    savepath = os.path.join(directory, typeDirec, '{:06}.jpg'.format(i))
-                    print(link, "save as", str(i)+".jpg")
+                    savepath = os.path.join(
+                        directory, typeDirec, (prefix+'{:06}.jpg'.format(i+startingnos)))
+                    print(link, "save as", (prefix+str(i+startingnos)+".jpg"))
                     try:
                         ulib.urlretrieve(link, savepath)
                     except (ulibError.HTTPError, ulibError.URLError) as e:
@@ -127,20 +153,22 @@ def saveImages(data, name, onlyType=''):
                 else:
                     if not os.path.isdir(directory+"/"+type):
                         os.mkdir(directory+"/"+type)
-                    savepath = os.path.join(directory, type, '{:06}.jpg'.format(i))
+                    savepath = os.path.join(
+                        directory, type, (prefix+'{:06}.{}'.format((i+startingnos), type)))
                     try:
                         ulib.urlretrieve(link, savepath)
                     except (ulibError.HTTPError, ulibError.URLError) as e:
                         print(str(e))
                         pass
-                    print(link, "save as", str(i)+"."+type)
+                    print(link, "save as", (prefix+str(i+startingnos)+"."+type))
     elif onlyType in data:
         print("Saving only", onlyType)
         for i, link in enumerate(data[onlyType]):
             if not os.path.isdir(directory+"/"+onlyType):
                 os.mkdir(directory+"/"+onlyType)
-            savepath = os.path.join(directory, onlyType, '{:06}.jpg'.format(i))
-            print(link, "save as", i+"."+onlyType)
+            savepath = os.path.join(
+                directory, onlyType, (prefix + '{:06}.{}'.format((i+startingnos), onlyType)))
+            print(link+" save as "+prefix+str(i+startingnos)+"."+onlyType)
             try:
                 ulib.urlretrieve(link, savepath)
             except (ulibError.HTTPError, ulibError.URLError) as e:
