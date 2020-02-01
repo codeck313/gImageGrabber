@@ -17,7 +17,7 @@
 from setuptools import setup
 setup(
     name='gImageGrabber',
-    version='0.1.16.1',
+    version='0.1.16.3',
     author='Saksham Sharma',
     author_email='codeck313@gmail.com',
     packages=['imggrabber'],
@@ -44,6 +44,7 @@ setup(
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
         "Operating System :: Microsoft :: Windows :: Windows 10",
+        "Operating System :: POSIX :: Linux",
         "Natural Language :: English",
         "Topic :: Scientific/Engineering :: Information Analysis",
         "Topic :: Utilities",

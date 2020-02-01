@@ -6,7 +6,7 @@ Google Image Grabber
 It provides tools to grab images from a google search by extracting the links of
 the images and downloading original  images.
 
-This module is written for windows 10 on 64-bit processor.
+This module is written for windows 10 or Ubuntu 16.0 on 64-bit processor.
 It uses Selenium to open browser so as to scroll down to get more images than
 possible otherwise. Thus it **needs a browser** to work correctly. This is on *default*
 set to use *chrome browser* in case of inability to open it Firefox will be used.
