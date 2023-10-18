@@ -34,7 +34,7 @@ setup(
     long_description=open('README.rst').read(),
     keywords="google images extractor parser webpage gImageGrabber grabber extract search image python",
     install_requires=[
-        'urllib3==1.26.5',
+        'urllib3==1.26.18',
         "beautifulsoup4==4.6.3",
         "selenium==3.14.1",
 
